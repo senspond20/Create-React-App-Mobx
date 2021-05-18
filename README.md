@@ -1,6 +1,11 @@
 # Create-React-App Mobx Without Eject
 
+## STEP. 01 
+```
+create-react-app myapp
+```
 
+## STEP. 02 
 
 ```git
 yarn add --dev customize-cra
@@ -15,8 +20,25 @@ yarn add --dev react-app-rewired
     "eject": "react-scripts eject"
   },
 ```
++ **config-overrides.js**
 
-+ config-overrides.js
+```
+const { 
+    addDecoratorsLegacy, // decorator를 사용할 수 있도록 해주는 config
+    disableEsLint,
+    override,
+  } = require("customize-cra");
+  
+  // 사용자 정의 웹팩 설정
+  module.exports = {
+    webpack: override(
+        disableEsLint(),
+        addDecoratorsLegacy()
+    ),
+  };
+```
+
+## STEP. 03
 
 ```
 // babel 플러그인 설치
@@ -30,7 +52,7 @@ yarn add mobx mobx-react
 
 ```
 
-+ package.json or .babelrc
++ package.json
 ```
   "babel":{
       "presets": [
@@ -52,8 +74,8 @@ yarn add mobx mobx-react
       ]
   }
 ```
++ jsconfig.json
 
-jsconfig.json
 ```json
 {
     "compilerOptions": {
